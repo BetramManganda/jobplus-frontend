@@ -21,6 +21,8 @@ export default function login() {
 
   const handleSuccess = (res) => {
     //set the jwt token in a cookie
+
+    console.log(res.data.jwt);
     saveAuthCookie(res.data.jwt);
     // reset our state
     setIdentifier("");
@@ -33,6 +35,8 @@ export default function login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); //prevent default form submission
+
+    // console.log("data", { identifier, password });
 
     await post("auth/local", {
       data: { identifier, password },
