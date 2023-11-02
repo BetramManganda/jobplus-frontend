@@ -35,10 +35,14 @@ export default function listings() {
     fetchJobs();
   }, []);
 
+  const handlePageChange = (pageNumber) => {
+    fetchJobs(pageNumber);
+  };
+
   return (
     <section>
       {jobs.map((job) => (
-        <div className="listing__card">
+        <div key={job.id} className="listing__card">
           <header className="listing__header">
             <h1 className="listing__title">{job.title}</h1>
             <img className="listing__saved" src={StarSaved} alt="" />
@@ -71,7 +75,7 @@ export default function listings() {
           </a>
         </div>
       ))}
-      <Paginate />
+      <Paginate meta={meta.pagination} onPageChange={handlePageChange} />
     </section>
   );
 }
